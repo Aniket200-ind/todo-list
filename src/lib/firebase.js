@@ -1,6 +1,8 @@
-// Import the functions you need from the SDKs you need
+//! File: src/lib/firebase.js
+
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
 
 //? Firebase configuration
 
@@ -14,7 +16,13 @@ const firebaseConfig = {
   measurementId: import.meta.env.VITE_MEASUREMENT_ID
 };
 
-// Initialize Firebase
+//? Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-export const auth = getAuth(app);
+//? Intialize Firebase authentication and get a reference to the service 
+const auth = getAuth(app);
+
+//? Initialize Cloud Firestore and get a reference to the service
+const db = getFirestore(app);
+
+export { app, auth, db };
