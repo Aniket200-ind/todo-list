@@ -1,7 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
+
+@theme{
+  --font-sora: 'Sora', sans-serif;
+  --color-light-background: #ffffff;
+  --color-light-text: #1f2937;
+  --color-light-accent: #6366f1;
+  --color-light-accent-text: #ffffff;
+  --color-light-secondary-background: #f3f4f6;
+  --color-light-secondary-text: #374151;
+  --color-light-border: #e5e7eb;
+  --color-light-muted: #9ca3af;
+  --color-dark-background: #0f172a;
+  --color-dark-text: #f8fafc;
+  --color-dark-accent: #818cf8;
+  --color-dark-accent-text: #1e293b;
+  --color-dark-secondary-background: #1e293b;
+  --color-dark-secondary-text: #f8fafc;
+  --color-dark-border: #334155;
+  --color-dark-muted: #64748b;
+}
 
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
