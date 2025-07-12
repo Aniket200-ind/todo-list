@@ -1,4 +1,6 @@
-import { createContext, useContext, useEffect, useState } from 'react';
+//! File: src/context/ThemeContext.jsx
+
+import { createContext, useEffect, useState } from 'react';
 import { toast } from 'sonner';
 
 const ThemeContext = createContext();
@@ -36,4 +38,4 @@ export const ThemeProvider = ({ children }) => {
   );
 };
 
-export const useTheme = () => useContext(ThemeContext);
+export default ThemeContext;
