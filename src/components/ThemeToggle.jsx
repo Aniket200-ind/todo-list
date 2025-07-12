@@ -1,6 +1,9 @@
-import { useTheme } from '@/context/ThemeContext';
+//! File: src/components/ThemeToggle.jsx
+
+
 import { useEffect, useState } from 'react';
 import { Moon, Sun } from 'lucide-react';
+import { useTheme } from './hooks/useTheme';
 
 export default function ThemeToggle() {
   const { theme, toggleTheme } = useTheme();
