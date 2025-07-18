@@ -51,7 +51,7 @@ export function Login() {
             onClick={handleLogin}
             aria-label="Sign in with Google"
             type="button"
-            className="w-full bg-light-accent dark:bg-dark-accent text-light-accent-text dark:text-dark-accent-text font-semibold py-3 md:py-4 px-6 rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 active:translate-y-0 hover:opacity-90 focus:outline-none focus:ring-4 focus:ring-light-accent/30 dark:focus:ring-dark-accent/30"
+            className="w-full bg-light-accent dark:bg-dark-accent text-light-accent-text dark:text-dark-accent-text font-semibold py-3 md:py-4 px-6 rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 active:translate-y-0 hover:opacity-90 focus:outline-none focus:ring-4 focus:ring-light-accent/30 dark:focus:ring-dark-accent/30 cursor-pointer"
           >
             <span className="flex items-center justify-center gap-3">
               <span className="text-lg">🔐</span>
