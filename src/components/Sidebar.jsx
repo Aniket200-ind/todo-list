@@ -138,10 +138,6 @@ export default function Sidebar() {
                         className="w-8 h-8 rounded-full border-2 border-sidebar-primary/20 shadow-lg object-cover"
                         
                       />
-                      <div
-                        className="w-8 h-8 bg-sidebar-primary rounded-full flex items-center justify-center"
-                        >
-                      </div>
                     </div>
                     <span className="ml-3 text-sidebar-foreground font-medium">
                       {user?.displayName?.split(" ")[0] ||
