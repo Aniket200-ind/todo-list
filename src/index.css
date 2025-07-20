@@ -4,8 +4,11 @@
 
 @custom-variant dark (&:is(.dark *));
 
-@theme{
+@theme {
+  /* Sora font */
   --font-sora: 'Sora', sans-serif;
+
+  /* Color themes */
   --color-light-background: #ffffff;
   --color-light-text: #1f2937;
   --color-light-accent: #6366f1;
@@ -22,6 +25,33 @@
   --color-dark-secondary-text: #f8fafc;
   --color-dark-border: #334155;
   --color-dark-muted: #64748b;
+
+  /* Custom animations */
+  --animate-pulseglow: pulseglow 4s ease-in-out infinite;
+  --animate-gradientx: gradientx 5s ease infinite;
+
+ @keyframes pulseglow {
+  0%, 100% {
+    opacity: 0.2;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.2);
+  }
+}
+
+@keyframes gradientx {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
 }
 
 @theme inline {
@@ -135,6 +165,7 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }
