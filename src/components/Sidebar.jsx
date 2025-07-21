@@ -136,7 +136,7 @@ export default function Sidebar() {
                         }
                         alt="User"
                         className="w-8 h-8 rounded-full border-2 border-sidebar-primary/20 shadow-lg object-cover"
-                        
+                        referrerPolicy="no-referrer"
                       />
                     </div>
                     <span className="ml-3 text-sidebar-foreground font-medium">
