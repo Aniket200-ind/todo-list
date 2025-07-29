@@ -11,7 +11,7 @@ const TodoItem = ({ todo, toggleCompleteTodo, deleteTodo, editTodo }) => {
   const [editDescription, setEditDescription] = useState(todo.description || "")
   const [isUpdating, setIsUpdating] = useState(false)
 
-  // Toggle completion status
+  //* Toggle completion status
   const handleToggleComplete = async () => {
     if (isUpdating) return
     setIsUpdating(true)
@@ -24,9 +24,9 @@ const TodoItem = ({ todo, toggleCompleteTodo, deleteTodo, editTodo }) => {
     } finally {
       setIsUpdating(false)
     }
-  } // ✅ FIXED: Added missing closing brace
+  }
 
-  // Save edited todo
+  //* Save edited todo
   const handleSave = async () => {
     if (!editTitle.trim()) {
       toast.error("Task title cannot be empty")
@@ -48,16 +48,16 @@ const TodoItem = ({ todo, toggleCompleteTodo, deleteTodo, editTodo }) => {
     } finally {
       setIsUpdating(false)
     }
-  } // ✅ FIXED: Added missing closing brace
+  } 
 
-  // Cancel editing
+  //* Cancel editing
   const handleCancel = () => {
     setEditTitle(todo.title)
     setEditDescription(todo.description || "")
     setIsEditing(false)
-  } // ✅ FIXED: Added missing closing brace
+  } 
 
-  // Delete todo
+  //* Delete todo
   const handleDelete = async () => {
     if (isUpdating) return
     setIsUpdating(true)
@@ -70,7 +70,7 @@ const TodoItem = ({ todo, toggleCompleteTodo, deleteTodo, editTodo }) => {
     } finally {
       setIsUpdating(false)
     }
-  } // ✅ FIXED: Added missing closing brace
+  }
 
   // Handle keyboard shortcuts
   const handleKeyDown = (e) => {
@@ -81,7 +81,7 @@ const TodoItem = ({ todo, toggleCompleteTodo, deleteTodo, editTodo }) => {
     if (e.key === "Escape") {
       handleCancel()
     }
-  } // ✅ FIXED: Added missing closing brace
+  }
 
   return (
     <motion.div
