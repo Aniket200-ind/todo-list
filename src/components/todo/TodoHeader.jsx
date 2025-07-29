@@ -47,7 +47,7 @@ const TodoHeader = ({ addTodo }) => {
   };
 
   return (
-    <div className="px-4 py-6 sm:px-6 sm:py-8">
+    <div className="px-4 pb-6 sm:px-6 sm:pb-8">
       {/* Welcome Section */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
