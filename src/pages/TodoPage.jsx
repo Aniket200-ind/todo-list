@@ -1,6 +1,5 @@
 //! File: src/pages/TodoPage.jsx
 
-import Quote from "@/components/todo/Quote"
 import TodoHeader from "@/components/todo/TodoHeader"
 import TodoList from "@/components/todo/TodoList"
 import useAuth from "@/hooks/useAuth"
@@ -19,7 +18,6 @@ const TodoPage = () => {
           deleteTodo={todoFunctions.deleteTodo}
           editTodo={todoFunctions.editTodo}
         />
-        <Quote />
     </section>
   )
 }
