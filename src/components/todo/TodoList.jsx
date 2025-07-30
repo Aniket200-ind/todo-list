@@ -9,6 +9,7 @@ import {
   SelectValue,
 } from "../ui/select";
 import { Funnel } from "lucide-react";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { motion, AnimatePresence } from "framer-motion";
 import TodoItem from "./TodoItem";
 
@@ -117,52 +118,54 @@ const TodoList = ({ todos, toggleCompleteTodo, deleteTodo, editTodo }) => {
       </motion.div>
 
       {/* Todo Items Container */}
-      <motion.div className="space-y-3" layout transition={{ duration: 0.3 }}>
-        <AnimatePresence mode="wait">
-          {filteredTodos.length === 0 ? (
-            <motion.div
-              key="empty-state"
-              className="text-center py-12"
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.9 }}
-              transition={{ duration: 0.3 }}
-            >
-              <motion.p
-                className="text-light-secondary-text dark:text-dark-secondary-text"
-                initial={{ y: 20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.1, duration: 0.3 }}
+      <ScrollArea className="h-[50vh] sm:pr-4">
+        <motion.div className="space-y-3" layout transition={{ duration: 0.3 }}>
+          <AnimatePresence mode="wait">
+            {filteredTodos.length === 0 ? (
+              <motion.div
+                key="empty-state"
+                className="text-center py-12"
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ duration: 0.3 }}
               >
-                {filter === "all"
-                  ? "No tasks yet. Add one above to get started!"
-                  : `No ${filter} tasks found.`}
-              </motion.p>
-            </motion.div>
-          ) : (
-            <motion.div
-              key="todo-items"
-              className="space-y-3"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-            >
-              <AnimatePresence>
-                {filteredTodos.map((todo) => (
-                  <TodoItem
-                    key={todo.id}
-                    todo={todo}
-                    toggleCompleteTodo={toggleCompleteTodo}
-                    deleteTodo={deleteTodo}
-                    editTodo={editTodo}
-                  />
-                ))}
-              </AnimatePresence>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </motion.div>
+                <motion.p
+                  className="text-light-secondary-text dark:text-dark-secondary-text"
+                  initial={{ y: 20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.1, duration: 0.3 }}
+                >
+                  {filter === "all"
+                    ? "No tasks yet. Add one above to get started!"
+                    : `No ${filter} tasks found.`}
+                </motion.p>
+              </motion.div>
+            ) : (
+              <motion.div
+                key="todo-items"
+                className="space-y-3"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                <AnimatePresence>
+                  {filteredTodos.map((todo) => (
+                    <TodoItem
+                      key={todo.id}
+                      todo={todo}
+                      toggleCompleteTodo={toggleCompleteTodo}
+                      deleteTodo={deleteTodo}
+                      editTodo={editTodo}
+                    />
+                  ))}
+                </AnimatePresence>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </motion.div>
+      </ScrollArea>
     </motion.div>
   );
 };
