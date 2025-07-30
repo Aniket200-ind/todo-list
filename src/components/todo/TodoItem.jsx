@@ -41,7 +41,7 @@ const TodoItem = ({ todo, toggleCompleteTodo, deleteTodo, editTodo }) => {
         description: editDescription.trim()
       })
       setIsEditing(false)
-      toast.success("Task updated successfully")
+      toast.success("Task updated successfully ✏️")
     } catch (error) {
       console.error('Error updating todo:', error)
       toast.error("Failed to update task")
@@ -63,7 +63,7 @@ const TodoItem = ({ todo, toggleCompleteTodo, deleteTodo, editTodo }) => {
     setIsUpdating(true)
     try {
       await deleteTodo(todo.id)
-      toast.success("Task deleted successfully")
+      toast.success("Task deleted successfully ❌")
     } catch (error) {
       console.error('Error deleting todo:', error)
       toast.error("Failed to delete task")
