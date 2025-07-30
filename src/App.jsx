@@ -4,7 +4,7 @@ import AppLayout from "@/layout/AppLayout";
 import { Login } from "@/components/auth/Login";
 import { BrowserRouter, Routes, Route } from "react-router";
 import { HomePage } from "@/pages/HomePage";
-import { Dashboard } from "@/pages/Dashboard";
+import { Dashboard } from "@/pages/DashboardPage";
 import TodoPage from "./pages/TodoPage";
 
 function App() {
