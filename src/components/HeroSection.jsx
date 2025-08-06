@@ -2,9 +2,20 @@
 
 import { useNavigate } from "react-router";
 import { motion } from "framer-motion";
+import useAuth from "@/hooks/useAuth";
 
 const HeroSection = () => {
   const navigate = useNavigate();
+
+  const { user } = useAuth();
+
+  const handleSignInClick = () => {
+    if (user) {
+      navigate("/dashboard");
+    } else {
+      navigate("/login");
+    }
+  };
 
   return (
     <section className="min-h-screen flex flex-col items-center justify-center px-4 py-12 relative overflow-hidden">
@@ -170,7 +181,7 @@ const HeroSection = () => {
 
           {/* Sign in Button */}
           <button
-            onClick={() => navigate("/login")}
+            onClick={handleSignInClick}
             className="w-full sm:w-auto px-8 py-4 bg-light-secondary-background dark:bg-dark-secondary-background text-light-text dark:text-dark-text font-semibold rounded-2xl border-2 border-light-border dark:border-dark-border transition-all duration-200 hover:shadow-lg transform hover:-translate-y-1 active:translate-y-0 hover:bg-light-background dark:hover:bg-dark-background focus:outline-none focus:ring-4 focus:ring-light-muted/30 dark:focus:ring-dark-muted/30 cursor-pointer"
           >
             <span className="flex items-center justify-center gap-2">
