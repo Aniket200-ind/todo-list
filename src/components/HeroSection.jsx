@@ -94,7 +94,7 @@ const HeroSection = () => {
           className="mb-8"
         >
           <span className="text-light-muted dark:text-dark-muted text-sm md:text-base font-medium tracking-wide">
-            TodoApp
+            DoneIt
           </span>
         </motion.div>
 
