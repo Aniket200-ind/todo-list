@@ -1,9 +1,13 @@
 //! File: src/pages.DashboardPage.jsx
 
+import DashboardHeader from "@/components/dashboard/DashboardHeader"
+import Stats from "@/components/dashboard/Stats"
+
 export const Dashboard = () => {
   return (
-    <section>
-      <h1>Dashboard</h1>
+    <section className="space-y-10">
+      <DashboardHeader />
+      <Stats />
     </section>
   )
 }
