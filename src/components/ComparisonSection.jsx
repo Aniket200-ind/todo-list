@@ -64,14 +64,11 @@ const ComparisonSection = () => {
 
   return (
     <section className="py-24 px-4 relative overflow-hidden">
-      {/* Dynamic background that adapts to theme */}
       <div className="absolute inset-0 bg-gradient-to-br from-light-secondary-background via-light-background to-light-secondary-background dark:from-dark-background dark:via-dark-secondary-background dark:to-dark-background" />
 
-      {/* Subtle pattern overlay */}
       <div className="absolute inset-0 opacity-30 dark:opacity-20 bg-gradient-to-br from-light-accent/5 via-transparent to-light-accent/5 dark:from-dark-accent/5 dark:via-transparent dark:to-dark-accent/5" />
 
       <div className="relative z-10 max-w-6xl mx-auto">
-        {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -90,7 +87,6 @@ const ComparisonSection = () => {
           </p>
         </motion.div>
 
-        {/* Main Comparison Container */}
         <div className="relative flex flex-col lg:flex-row items-stretch min-h-[600px]">
           {/* Left Side - Guest Mode */}
           <motion.div
@@ -100,7 +96,6 @@ const ComparisonSection = () => {
             transition={{ duration: 0.8 }}
             className="flex-1 px-8 py-12 relative"
           >
-            {/* Guest Mode Header */}
             <aside className="text-center mb-8">
               <h3 className="text-2xl md:text-3xl font-bold text-light-text dark:text-dark-text mb-2">
                 GUEST MODE
@@ -110,7 +105,6 @@ const ComparisonSection = () => {
               </p>
             </aside>
 
-            {/* Guest Mode Cards */}
             <div className="space-y-6">
               {guestModeFeatures.map((item, index) => (
                 <motion.article
@@ -178,7 +172,6 @@ const ComparisonSection = () => {
             transition={{ duration: 0.8 }}
             className="flex-1 px-8 py-12 relative"
           >
-            {/* Logged-In Header */}
             <aside className="text-center mb-8">
               <h3 className="text-2xl md:text-3xl font-bold text-light-text dark:text-dark-text mb-2">
                 LOGGED-IN MODE
@@ -188,7 +181,6 @@ const ComparisonSection = () => {
               </p>
             </aside>
 
-            {/* Logged-In Mode Cards */}
             <div className="space-y-6">
               {loggedInModeFeatures.map((item, index) => (
                 <motion.article
@@ -216,7 +208,6 @@ const ComparisonSection = () => {
           </motion.div>
         </div>
 
-        {/* CTA Section */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -230,7 +221,6 @@ const ComparisonSection = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            {/* Try Guest Mode */}
             <button
               onClick={() => navigate("/todo")}
               className="w-full sm:w-auto px-8 py-4 bg-light-secondary-background dark:bg-dark-secondary-background hover:bg-light-background dark:hover:bg-dark-background text-light-text dark:text-dark-text font-semibold rounded-2xl border border-light-border dark:border-dark-border transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-1 active:translate-y-0 focus:outline-none focus:ring-4 focus:ring-light-muted/30 dark:focus:ring-dark-muted/30 cursor-pointer"
@@ -242,7 +232,6 @@ const ComparisonSection = () => {
               </span>
             </button>
 
-            {/* Sign In */}
             <button
               onClick={handleSignInClick}
               className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-light-accent to-purple-500 dark:from-dark-accent dark:to-purple-400 hover:from-light-accent/90 hover:to-purple-500/90 dark:hover:from-dark-accent/90 dark:hover:to-purple-400/90 text-light-accent-text dark:text-dark-accent-text font-semibold rounded-2xl transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-1 active:translate-y-0 focus:outline-none focus:ring-4 focus:ring-light-accent/30 dark:focus:ring-dark-accent/30 cursor-pointer"
