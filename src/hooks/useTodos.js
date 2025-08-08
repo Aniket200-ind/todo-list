@@ -69,10 +69,16 @@ export default function useTodos(user) {
 
       if (user) {
         try {
-          await addDoc(collection(db, "users", user.uid, "todos"), {
-            ...newTodo,
-            createdAt: serverTimestamp(),
-          });
+          const addPromise = addDoc(collection(db, "users", user.uid, "todos"), {
+          ...newTodo,
+          createdAt: serverTimestamp(),
+        });
+
+           const timeoutPromise = new Promise((_, reject) =>
+          setTimeout(() => reject(new Error("Network timeout")), 8000)
+        );
+        
+        await Promise.race([addPromise, timeoutPromise]);
         } catch (error) {
           console.error("Error adding todo to Firestore:", error);
           throw error;
