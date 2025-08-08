@@ -128,7 +128,7 @@ const StatCard = ({
             animate="visible"
             transition={{ delay: delay + 0.4 }}
           >
-            <h3 className="text-4xl sm:text-5xl font-bold text-light-text dark:text-dark-text mb-2 font-mono tracking-tight">
+            <h3 className="text-4xl sm:text-5xl font-bold text-light-text dark:text-dark-text mb-2 ml-3 sm:ml-2 font-mono tracking-tight">
               <CountUp to={value} delay={delay + 0.6} duration={1.2} />
             </h3>
           </motion.div>
