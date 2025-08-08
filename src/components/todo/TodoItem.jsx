@@ -1,112 +1,110 @@
 //! File: src/components/todo/TodoItem.jsx
 
-import { useState } from "react"
-import { motion, AnimatePresence } from "framer-motion"
-import { Check, X, Pencil, Save } from "lucide-react"
-import { toast } from "sonner"
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Check, X, Pencil, Save } from "lucide-react";
+import { toast } from "sonner";
 
 const TodoItem = ({ todo, toggleCompleteTodo, deleteTodo, editTodo }) => {
-  const [isEditing, setIsEditing] = useState(false)
-  const [editTitle, setEditTitle] = useState(todo.title)
-  const [editDescription, setEditDescription] = useState(todo.description || "")
-  const [isUpdating, setIsUpdating] = useState(false)
+  const [isEditing, setIsEditing] = useState(false);
+  const [editTitle, setEditTitle] = useState(todo.title);
+  const [editDescription, setEditDescription] = useState(
+    todo.description || ""
+  );
+  const [isUpdating, setIsUpdating] = useState(false);
 
-  //* Toggle completion status
   const handleToggleComplete = async () => {
-    if (isUpdating) return
-    setIsUpdating(true)
+    if (isUpdating) return;
+    setIsUpdating(true);
     try {
-      await toggleCompleteTodo(todo.id)
-      toast.success(todo.completed ? "Task marked as incomplete" : "Task completed! 🎉")
+      await toggleCompleteTodo(todo.id);
+      toast.success(
+        todo.completed ? "Task marked as incomplete" : "Task completed! 🎉"
+      );
     } catch (error) {
-      console.error('Error toggling todo:', error)
-      toast.error("Failed to update task")
+      console.error("Error toggling todo:", error);
+      toast.error("Failed to update task");
     } finally {
-      setIsUpdating(false)
+      setIsUpdating(false);
     }
-  }
+  };
 
-  //* Save edited todo
   const handleSave = async () => {
     if (!editTitle.trim()) {
-      toast.error("Task title cannot be empty")
-      return
+      toast.error("Task title cannot be empty");
+      return;
     }
-    if (isUpdating) return
-    
-    setIsUpdating(true)
+    if (isUpdating) return;
+
+    setIsUpdating(true);
     try {
       await editTodo(todo.id, {
         title: editTitle.trim(),
-        description: editDescription.trim()
-      })
-      setIsEditing(false)
-      toast.success("Task updated successfully ✏️")
+        description: editDescription.trim(),
+      });
+      setIsEditing(false);
+      toast.success("Task updated successfully ✏️");
     } catch (error) {
-      console.error('Error updating todo:', error)
-      toast.error("Failed to update task")
+      console.error("Error updating todo:", error);
+      toast.error("Failed to update task");
     } finally {
-      setIsUpdating(false)
+      setIsUpdating(false);
     }
-  } 
+  };
 
-  //* Cancel editing
   const handleCancel = () => {
-    setEditTitle(todo.title)
-    setEditDescription(todo.description || "")
-    setIsEditing(false)
-  } 
+    setEditTitle(todo.title);
+    setEditDescription(todo.description || "");
+    setIsEditing(false);
+  };
 
-  //* Delete todo
   const handleDelete = async () => {
-    if (isUpdating) return
-    setIsUpdating(true)
+    if (isUpdating) return;
+    setIsUpdating(true);
     try {
-      await deleteTodo(todo.id)
-      toast.success("Task deleted successfully ❌")
+      await deleteTodo(todo.id);
+      toast.success("Task deleted successfully ❌");
     } catch (error) {
-      console.error('Error deleting todo:', error)
-      toast.error("Failed to delete task")
+      console.error("Error deleting todo:", error);
+      toast.error("Failed to delete task");
     } finally {
-      setIsUpdating(false)
+      setIsUpdating(false);
     }
-  }
+  };
 
-  // Handle keyboard shortcuts
   const handleKeyDown = (e) => {
     if (e.key === "Enter" && !e.shiftKey) {
-      e.preventDefault()
-      handleSave()
+      e.preventDefault();
+      handleSave();
     }
     if (e.key === "Escape") {
-      handleCancel()
+      handleCancel();
     }
-  }
+  };
 
   return (
     <motion.div
       layout
       initial={{ opacity: 0, y: 20 }}
-      animate={{ 
-        opacity: 1, 
+      animate={{
+        opacity: 1,
         y: 0,
-        scale: todo.completed ? 0.98 : 1
+        scale: todo.completed ? 0.98 : 1,
       }}
       exit={{ opacity: 0, y: -20 }}
       transition={{ duration: 0.2 }}
       className="p-4 bg-light-background dark:bg-dark-background border border-light-border dark:border-dark-border rounded-xl shadow-sm hover:shadow-md transition-shadow duration-200"
     >
       <div className="flex items-start gap-3">
-        {/* Checkbox */}
         <motion.button
           onClick={handleToggleComplete}
           disabled={isUpdating || isEditing}
           whileTap={{ scale: 0.9 }}
           className={`mt-1 w-5 h-5 rounded border-2 flex items-center justify-center transition-colors ${
-            todo.completed 
-              ? "bg-light-accent dark:bg-dark-accent border-light-accent dark:border-dark-accent text-white" 
+            todo.completed
+              ? "bg-light-accent dark:bg-dark-accent border-light-accent dark:border-dark-accent text-white"
               : "border-light-border dark:border-dark-border hover:border-light-accent dark:hover:border-dark-accent"
-          } ${isUpdating ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
+          } ${isUpdating ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}`}
         >
           {isUpdating ? (
             <motion.div
@@ -131,10 +129,8 @@ const TodoItem = ({ todo, toggleCompleteTodo, deleteTodo, editTodo }) => {
           )}
         </motion.button>
 
-        {/* Content */}
         <div className="flex-1 min-w-0">
           {isEditing ? (
-            // Edit Mode
             <div className="space-y-3">
               <input
                 type="text"
@@ -156,30 +152,30 @@ const TodoItem = ({ todo, toggleCompleteTodo, deleteTodo, editTodo }) => {
               />
             </div>
           ) : (
-            // View Mode
+
             <div>
-              <motion.h3 
+              <motion.h3
                 animate={{
-                  opacity: todo.completed ? 0.6 : 1
+                  opacity: todo.completed ? 0.6 : 1,
                 }}
                 transition={{ duration: 0.2 }}
                 className={`font-medium ${
-                  todo.completed 
-                    ? "line-through text-light-muted dark:text-dark-muted" 
+                  todo.completed
+                    ? "line-through text-light-muted dark:text-dark-muted"
                     : "text-light-text dark:text-dark-text"
                 }`}
               >
                 {todo.title}
               </motion.h3>
               {todo.description && (
-                <motion.p 
+                <motion.p
                   animate={{
-                    opacity: todo.completed ? 0.5 : 0.8
+                    opacity: todo.completed ? 0.5 : 0.8,
                   }}
                   transition={{ duration: 0.2 }}
                   className={`mt-1 text-sm ${
-                    todo.completed 
-                      ? "line-through text-light-muted dark:text-dark-muted" 
+                    todo.completed
+                      ? "line-through text-light-muted dark:text-dark-muted"
                       : "text-light-secondary-text dark:text-dark-secondary-text"
                   }`}
                 >
@@ -190,7 +186,6 @@ const TodoItem = ({ todo, toggleCompleteTodo, deleteTodo, editTodo }) => {
           )}
         </div>
 
-        {/* Actions */}
         <div className="flex items-center gap-1">
           {isEditing ? (
             <>
@@ -238,7 +233,7 @@ const TodoItem = ({ todo, toggleCompleteTodo, deleteTodo, editTodo }) => {
         </div>
       </div>
     </motion.div>
-  )
-}
+  );
+};
 
-export default TodoItem
+export default TodoItem;
