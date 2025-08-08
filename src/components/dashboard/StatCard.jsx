@@ -4,36 +4,33 @@ import CountUp from "@/components/Countup";
 import { motion } from "framer-motion";
 import { TrendingUp } from "lucide-react";
 
-
-
-const StatCard = ({ 
-    title, 
-    value, 
-    bgColor,
-    icon: Icon, 
-    iconColor, 
-    accentColor,
-    trend,
-    delay = 0 
-  }) => {
-    const cardVariants = {
-    hidden: { 
-      opacity: 0, 
+const StatCard = ({
+  title,
+  value,
+  bgColor,
+  icon: Icon,
+  iconColor,
+  trend,
+  delay = 0,
+}) => {
+  const cardVariants = {
+    hidden: {
+      opacity: 0,
       y: 30,
-      scale: 0.95
+      scale: 0.95,
     },
     visible: {
       opacity: 1,
       y: 0,
       scale: 1,
-      transition: { 
-        duration: 0.6, 
+      transition: {
+        duration: 0.6,
         ease: "easeOut",
         type: "spring",
         damping: 20,
-        stiffness: 100
-      }
-    }
+        stiffness: 100,
+      },
+    },
   };
 
   const numberVariants = {
@@ -45,9 +42,9 @@ const StatCard = ({
         duration: 0.8,
         ease: "easeOut",
         type: "spring",
-        damping: 15
-      }
-    }
+        damping: 15,
+      },
+    },
   };
 
   const iconBounce = {
@@ -56,33 +53,32 @@ const StatCard = ({
       transition: {
         duration: 2,
         repeat: Infinity,
-        ease: "easeInOut"
-      }
-    }
+        ease: "easeInOut",
+      },
+    },
   };
 
   const glowPulse = {
     animate: {
       scale: [1, 1.05, 1],
-      opacity: [0.5, 0.8, 0.5],
+      opacity: [0.7, 1, 0.7],
       transition: {
         duration: 3,
         repeat: Infinity,
-        ease: "easeInOut"
-      }
-    }
+        ease: "easeInOut",
+      },
+    },
   };
 
   return (
-
     <motion.div
       variants={cardVariants}
       initial="hidden"
       animate="visible"
-      whileHover={{ 
-        y: -8, 
+      whileHover={{
+        y: -8,
         scale: 1.02,
-        transition: { duration: 0.3, ease: "easeOut" }
+        transition: { duration: 0.3, ease: "easeOut" },
       }}
       whileTap={{ scale: 0.98 }}
       className="relative group cursor-pointer"
@@ -95,15 +91,14 @@ const StatCard = ({
         className={`absolute inset-0 ${bgColor} rounded-2xl blur-xl opacity-20 group-hover:opacity-30 transition-opacity duration-500`}
         style={{ animationDelay: `${delay * 0.5}s` }}
       />
-      
+
       {/* Main card */}
       <div className="relative bg-light-background dark:bg-dark-background border border-light-border dark:border-dark-border rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden">
-        
         {/* Gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-light-secondary-background/30 dark:to-dark-secondary-background/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-        
+
         <div className="relative space-y-4">
-          {/* Icon and trend */}
+
           <div className="flex items-center justify-between">
             <motion.div
               variants={iconBounce}
@@ -113,7 +108,7 @@ const StatCard = ({
             >
               <Icon className={`w-6 h-6 ${iconColor}`} />
             </motion.div>
-            
+
             {trend && (
               <motion.div
                 initial={{ opacity: 0, x: 10 }}
@@ -126,8 +121,7 @@ const StatCard = ({
               </motion.div>
             )}
           </div>
-          
-          {/* Number with CountUp */}
+
           <motion.div
             variants={numberVariants}
             initial="hidden"
@@ -135,15 +129,10 @@ const StatCard = ({
             transition={{ delay: delay + 0.4 }}
           >
             <h3 className="text-4xl sm:text-5xl font-bold text-light-text dark:text-dark-text mb-2 font-mono tracking-tight">
-              <CountUp 
-                to={value} 
-                delay={delay + 0.6}
-                duration={1.2}
-              />
+              <CountUp to={value} delay={delay + 0.6} duration={1.2} />
             </h3>
           </motion.div>
-          
-          {/* Title and description */}
+
           <div className="space-y-1">
             <motion.h4
               initial={{ opacity: 0, y: 10 }}
@@ -157,7 +146,7 @@ const StatCard = ({
         </div>
       </div>
     </motion.div>
-  )
-  };
+  );
+};
 
-  export default StatCard;
+export default StatCard;
