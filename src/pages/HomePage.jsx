@@ -2,22 +2,18 @@
 
 import { useState, useEffect, lazy, Suspense } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  ChevronUp,
-} from "lucide-react";
+import { ChevronUp } from "lucide-react";
 import LoadingSkeleton from "@/components/Skeleton";
 import {
   HeroSectionSkeleton,
   FeaturesSectionSkeleton,
   ComparisonSectionSkeleton,
-  FooterSkeleton
+  FooterSkeleton,
 } from "@/components/Skeleton";
-
 
 export function HomePage() {
   const [showScrollTop, setShowScrollTop] = useState(false);
 
-  // Show scroll-to-top button after scrolling past 300px
   useEffect(() => {
     const handleScroll = () => {
       setShowScrollTop(window.scrollY > 300);
@@ -27,7 +23,6 @@ export function HomePage() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Smooth scroll to top
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -35,32 +30,27 @@ export function HomePage() {
     });
   };
 
-  // Lazy load components
   const HeroSection = lazy(() => import("../components/HeroSection"));
   const FeaturesSection = lazy(() => import("../components/FeaturesSection"));
-  const ComparisonSection = lazy(() => import("@/components/ComparisonSection"));
+  const ComparisonSection = lazy(() =>
+    import("@/components/ComparisonSection")
+  );
   const Footer = lazy(() => import("../components/Footer"));
-
 
   return (
     <div>
-      {/* Hero Section */}
       <Suspense fallback={<HeroSectionSkeleton />}>
         <HeroSection />
       </Suspense>
 
-      {/* Feature Highlights Section */}
       <Suspense fallback={<FeaturesSectionSkeleton />}>
-        <FeaturesSection /> 
+        <FeaturesSection />
       </Suspense>
 
-      {/* Guest vs Logged-in Comparison Section */}
       <Suspense fallback={<ComparisonSectionSkeleton />}>
         <ComparisonSection />
       </Suspense>
 
-      {/* Footer Section */}
-      {/* Scroll to Top Button */}
       <AnimatePresence>
         {showScrollTop && (
           <motion.button
@@ -76,7 +66,6 @@ export function HomePage() {
         )}
       </AnimatePresence>
 
-      {/* Footer */}
       <Suspense fallback={<FooterSkeleton />}>
         <Footer />
       </Suspense>
