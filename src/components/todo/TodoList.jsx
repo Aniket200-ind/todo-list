@@ -14,7 +14,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import TodoItem from "./TodoItem";
 
 const TodoList = ({ todos, toggleCompleteTodo, deleteTodo, editTodo }) => {
-
   const [filter, setFilter] = useState("all");
 
   const filteredTodos = useMemo(() => {
@@ -23,7 +22,7 @@ const TodoList = ({ todos, toggleCompleteTodo, deleteTodo, editTodo }) => {
         return todos;
       case "completed":
         return todos.filter((todo) => todo.completed);
-      case "pending": // ✅ Changed from "incomplete" to "pending" to match dropdown
+      case "pending":
         return todos.filter((todo) => !todo.completed);
       default:
         return todos;
@@ -37,7 +36,6 @@ const TodoList = ({ todos, toggleCompleteTodo, deleteTodo, editTodo }) => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.2 }}
     >
-      {/* Header with Filter */}
       <motion.div
         className="flex items-center justify-between mb-6"
         initial={{ opacity: 0 }}
@@ -74,7 +72,6 @@ const TodoList = ({ todos, toggleCompleteTodo, deleteTodo, editTodo }) => {
           </motion.p>
         </div>
 
-        {/* Filter Dropdown with Animation */}
         <motion.div
           className="flex items-center gap-2"
           initial={{ x: 20, opacity: 0 }}
@@ -117,7 +114,6 @@ const TodoList = ({ todos, toggleCompleteTodo, deleteTodo, editTodo }) => {
         </motion.div>
       </motion.div>
 
-      {/* Todo Items Container */}
       <ScrollArea className="h-[50vh] sm:pr-4">
         <motion.div className="space-y-3" layout transition={{ duration: 0.3 }}>
           <AnimatePresence mode="wait">
