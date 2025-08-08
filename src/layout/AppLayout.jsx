@@ -10,9 +10,7 @@ export default function AppLayout({ children }) {
 
   return (
     <div className="min-h-screen flex bg-light-background dark:bg-dark-background transition-colors duration-300">
-      {/* Sidebar only on non-login pages */}
       {!isLoginPage && <Sidebar />}
-      {/* Main Content Area */}
       <div className="flex-1 flex flex-col">
         <header className="w-full flex justify-end p-4">
           {!isLoginPage && <ThemeToggle />}
