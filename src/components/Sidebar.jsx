@@ -92,7 +92,7 @@ export default function Sidebar() {
               <div className="flex items-center mb-8 mt-12">
                 <Sparkles className="h-8 w-8 text-sidebar-primary" />
                 <h1 className="ml-3 text-xl font-bold text-sidebar-foreground">
-                  TodoApp
+                  DoneIt
                 </h1>
               </div>
 
