@@ -1,14 +1,13 @@
 //! File: src/components/dashboard/Stats.jsx
 
 import { motion } from "framer-motion";
-import { ListTodo, CheckCircle2, Clock, Award, BarChart3 } from "lucide-react";
-import { useState, useEffect } from "react";
+import { ListTodo, CheckCircle2, Clock, BarChart3 } from "lucide-react";
 import StatCard from "@/components/dashboard/StatCard";
 import useTaskStats from "@/hooks/useTaskStats";
 
 
 const Stats = () => {
-  const stats = useTaskStats()
+  const stats = useTaskStats();
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -87,7 +86,7 @@ const Stats = () => {
           bgColor="bg-green-500/10 dark:bg-green-400/10"
           iconColor="text-green-600 dark:text-green-400"
           accentColor="bg-green-500"
-          trend="+5 this week"
+          trend={`+${stats.completedThisWeek} this week`}
           delay={0.15}
         />
 
@@ -98,7 +97,6 @@ const Stats = () => {
           bgColor="bg-orange-500/10 dark:bg-orange-400/10"
           iconColor="text-orange-600 dark:text-orange-400"
           accentColor="bg-orange-500"
-          trend="-2 today"
           delay={0.3}
         />
       </div>
