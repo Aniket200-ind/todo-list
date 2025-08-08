@@ -21,16 +21,16 @@ export default function Sidebar() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // Close menu when route changes
+
   useEffect(() => {
     setIsOpen(false);
   }, [location.pathname]);
 
   useEffect(() => {
-  const handleKey = (e) => e.key === "Escape" && setIsOpen(false);
-  window.addEventListener("keydown", handleKey);
-  return () => window.removeEventListener("keydown", handleKey);
-}, []);
+    const handleKey = (e) => e.key === "Escape" && setIsOpen(false);
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, []);
 
   const navigationItems = [
     { to: "/", icon: Home, label: "Home" },
@@ -40,19 +40,18 @@ export default function Sidebar() {
 
   const handleLogout = async () => {
     try {
-        await logout();
-        toast.success("Signed out successfully 👋");
-        navigate("/");
-      } catch (error) {
-        toast.error("Failed to sign out", {
-          description: error.message || "Please try again.",
-        });
-      }
+      await logout();
+      toast.success("Signed out successfully 👋");
+      navigate("/");
+    } catch (error) {
+      toast.error("Failed to sign out", {
+        description: error.message || "Please try again.",
+      });
+    }
   };
 
   return (
     <>
-      {/* Hamburger Button - Fixed Position */}
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="fixed top-4 left-4 z-50 p-2 bg-sidebar rounded-lg border border-sidebar-border shadow-lg hover:bg-sidebar-accent transition-colors cursor-pointer"
@@ -77,7 +76,6 @@ export default function Sidebar() {
         )}
       </AnimatePresence>
 
-      {/* Sidebar */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -96,7 +94,6 @@ export default function Sidebar() {
                 </h1>
               </div>
 
-              {/* Navigation */}
               <nav className="flex-1">
                 <ul className="space-y-2">
                   {navigationItems.map((item) => {
@@ -122,7 +119,6 @@ export default function Sidebar() {
                 </ul>
               </nav>
 
-              {/* User Section */}
               <div className="border-t border-sidebar-border pt-4">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center">
@@ -147,17 +143,15 @@ export default function Sidebar() {
                         "User"}
                     </span>
                   </div>
-                  {
-                    user && (
-                      <button
-                        onClick={handleLogout}
-                        className="text-sidebar-foreground hover:text-sidebar-primary transition-colors"
-                        aria-label="Logout"
-                      >
-                        <LogOut className="h-5 w-5" />
-                      </button>
-                    )
-                  }
+                  {user && (
+                    <button
+                      onClick={handleLogout}
+                      className="text-sidebar-foreground hover:text-sidebar-primary transition-colors"
+                      aria-label="Logout"
+                    >
+                      <LogOut className="h-5 w-5" />
+                    </button>
+                  )}
                 </div>
               </div>
             </div>
