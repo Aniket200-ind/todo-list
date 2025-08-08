@@ -25,7 +25,6 @@ export function Login() {
       <div className="w-full max-w-md">
         {/* Main Card */}
         <div className="bg-light-secondary-background dark:bg-dark-secondary-background p-8 md:p-10 rounded-3xl shadow-2xl transition-all duration-300 hover:shadow-3xl">
-          {/* Header Section */}
           <div className="text-center mb-8">
             <div className="flex justify-center mb-6">
               {/* Google Logo */}
@@ -69,7 +68,6 @@ export function Login() {
           </div>
         </div>
 
-        {/* Additional Info */}
         <div className="mt-6 text-center">
           <p className="text-xs text-light-muted dark:text-dark-muted">
             By signing in, you agree to our terms of service and privacy policy.
