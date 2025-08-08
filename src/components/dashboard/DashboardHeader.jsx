@@ -1,17 +1,14 @@
 //! File: src/components/dashboard/DashboardHeader.jsx
 
 import { motion } from "framer-motion";
-import { 
-  ListTodo, 
-  TrendingUp, 
-  Target, 
-  Clock, 
-  CheckCircle2,
+import {
+  ListTodo,
+  TrendingUp,
+  Clock,
   Calendar,
   Zap,
-  Award,
   ArrowRight,
-  Sparkles
+  Sparkles,
 } from "lucide-react";
 import { Link } from "react-router";
 import useAuth from "@/hooks/useAuth";
@@ -29,32 +26,32 @@ const DashboardHeader = () => {
   }, []);
 
   const formatTime = (date) => {
-    return date.toLocaleTimeString('en-US', { 
-      hour: '2-digit', 
-      minute: '2-digit',
-      hour12: true 
+    return date.toLocaleTimeString("en-US", {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: true,
     });
   };
 
   const formatDate = (date) => {
-    return date.toLocaleDateString('en-US', { 
-      weekday: 'long',
-      month: 'long', 
-      day: 'numeric',
-      year: 'numeric'
+    return date.toLocaleDateString("en-US", {
+      weekday: "long",
+      month: "long",
+      day: "numeric",
+      year: "numeric",
     });
   };
 
-const containerVariants = {
+  const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
         duration: 0.6,
         when: "beforeChildren",
-        staggerChildren: 0.1
-      }
-    }
+        staggerChildren: 0.1,
+      },
+    },
   };
 
   const itemVariants = {
@@ -62,8 +59,8 @@ const containerVariants = {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.5, ease: "easeOut" }
-    }
+      transition: { duration: 0.5, ease: "easeOut" },
+    },
   };
 
   const floatingVariants = {
@@ -72,21 +69,19 @@ const containerVariants = {
       transition: {
         duration: 3,
         repeat: Infinity,
-        ease: "easeInOut"
-      }
-    }
+        ease: "easeInOut",
+      },
+    },
   };
   return (
-   <motion.div
+    <motion.div
       variants={containerVariants}
       initial="hidden"
       animate="visible"
       className="relative overflow-hidden"
     >
-      {/* Background Gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-light-accent/5 via-transparent to-light-accent/10 dark:from-dark-accent/10 dark:via-transparent dark:to-dark-accent/5 rounded-2xl" />
-      
-      {/* Floating Elements */}
+
       <motion.div
         variants={floatingVariants}
         animate="animate"
@@ -94,7 +89,7 @@ const containerVariants = {
       >
         <Sparkles className="w-6 h-6 text-light-accent dark:text-dark-accent drop-shadow-sm" />
       </motion.div>
-      
+
       <motion.div
         variants={floatingVariants}
         animate="animate"
@@ -106,7 +101,7 @@ const containerVariants = {
 
       <header className="relative px-4 sm:px-6 lg:px-8 py-2">
         <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6 mb-8">
-          {/* Welcome Text & Time */}
+
           <motion.div variants={itemVariants} className="space-y-5">
             {/* Date and Time */}
             <div className="flex flex-col sm:flex-row sm:items-center gap-2 text-light-muted dark:text-dark-muted text-sm">
@@ -123,14 +118,14 @@ const containerVariants = {
 
             {/* Main Welcome */}
             <div>
-              <motion.h1 
+              <motion.h1
                 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-light-text dark:text-dark-text mb-2"
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
               >
                 Welcome back,{" "}
-                <motion.span 
+                <motion.span
                   className="bg-gradient-to-r from-light-accent to-light-accent/80 dark:from-dark-accent dark:to-dark-accent/80 bg-clip-text text-transparent font-extrabold"
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
@@ -140,7 +135,7 @@ const containerVariants = {
                 </motion.span>
               </motion.h1>
 
-              <motion.p 
+              <motion.p
                 className="text-light-secondary-text dark:text-dark-secondary-text text-base sm:text-lg flex items-center gap-2"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -152,8 +147,11 @@ const containerVariants = {
             </div>
           </motion.div>
 
-          {/* Action Button */}
-          <motion.div variants={itemVariants} className="flex justify-center lg:justify-end lg:mt-10">
+
+          <motion.div
+            variants={itemVariants}
+            className="flex justify-center lg:justify-end lg:mt-10"
+          >
             <Link
               to="/todo"
               className="group relative overflow-hidden inline-flex items-center justify-center gap-3 px-6 py-4 rounded-xl bg-light-accent dark:bg-dark-accent text-light-accent-text dark:text-dark-accent-text shadow-lg hover:shadow-xl transition-all duration-300 font-semibold text-base transform hover:scale-105 active:scale-95"
