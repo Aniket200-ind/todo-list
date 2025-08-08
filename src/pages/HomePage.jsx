@@ -11,6 +11,13 @@ import {
   FooterSkeleton,
 } from "@/components/Skeleton";
 
+  const HeroSection = lazy(() => import("../components/HeroSection"));
+  const FeaturesSection = lazy(() => import("../components/FeaturesSection"));
+  const ComparisonSection = lazy(() =>
+    import("@/components/ComparisonSection")
+  );
+  const Footer = lazy(() => import("../components/Footer"));
+
 export function HomePage() {
   const [showScrollTop, setShowScrollTop] = useState(false);
 
@@ -29,13 +36,6 @@ export function HomePage() {
       behavior: "smooth",
     });
   };
-
-  const HeroSection = lazy(() => import("../components/HeroSection"));
-  const FeaturesSection = lazy(() => import("../components/FeaturesSection"));
-  const ComparisonSection = lazy(() =>
-    import("@/components/ComparisonSection")
-  );
-  const Footer = lazy(() => import("../components/Footer"));
 
   return (
     <div>
