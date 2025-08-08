@@ -22,11 +22,15 @@ export default function useTaskStats() {
 
     const todosRef = collection(db, "users", user.uid, "todos");
 
-    //* Get today's date
     const today = format(new Date(), "yyyy-MM-dd");
-    const weekStart = format(startOfWeek(new Date(), { weekStartsOn: 1 }), "yyyy-MM-dd");
-    const weekEnd = format(endOfWeek(new Date(), { weekStartsOn: 1 }), "yyyy-MM-dd");
-    
+    const weekStart = format(
+      startOfWeek(new Date(), { weekStartsOn: 1 }),
+      "yyyy-MM-dd"
+    );
+    const weekEnd = format(
+      endOfWeek(new Date(), { weekStartsOn: 1 }),
+      "yyyy-MM-dd"
+    );
 
     const unsubscribe = onSnapshot(todosRef, (snapshot) => {
       const completedTasks = snapshot.docs.filter(
@@ -41,7 +45,7 @@ export default function useTaskStats() {
       const tasksCompletedWithinWeek = snapshot.docs.filter((doc) => {
         const completedDate = doc.data().completedAt;
         return completedDate >= weekStart && completedDate <= weekEnd;
-      })
+      });
 
       setStats({
         total: snapshot.size,
