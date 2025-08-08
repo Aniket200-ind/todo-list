@@ -1,10 +1,20 @@
 //! File: src/components/ComparisonSection.jsx
 
+import useAuth from "@/hooks/useAuth";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router";
 
 const ComparisonSection = () => {
   const navigate = useNavigate();
+  const { user } = useAuth();
+
+  const handleSignInClick = () => {
+    if (user) {
+      navigate("/dashboard");
+    } else {
+      navigate("/login");
+    }
+  };
 
   const loggedInModeFeatures = [
     {
@@ -223,7 +233,7 @@ const ComparisonSection = () => {
             {/* Try Guest Mode */}
             <button
               onClick={() => navigate("/todo")}
-              className="w-full sm:w-auto px-8 py-4 bg-light-secondary-background dark:bg-dark-secondary-background hover:bg-light-background dark:hover:bg-dark-background text-light-text dark:text-dark-text font-semibold rounded-2xl border border-light-border dark:border-dark-border transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-1 active:translate-y-0 focus:outline-none focus:ring-4 focus:ring-light-muted/30 dark:focus:ring-dark-muted/30"
+              className="w-full sm:w-auto px-8 py-4 bg-light-secondary-background dark:bg-dark-secondary-background hover:bg-light-background dark:hover:bg-dark-background text-light-text dark:text-dark-text font-semibold rounded-2xl border border-light-border dark:border-dark-border transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-1 active:translate-y-0 focus:outline-none focus:ring-4 focus:ring-light-muted/30 dark:focus:ring-dark-muted/30 cursor-pointer"
               aria-label="Try Guest Mode"
             >
               <span className="flex items-center justify-center gap-2">
@@ -234,8 +244,8 @@ const ComparisonSection = () => {
 
             {/* Sign In */}
             <button
-              onClick={() => navigate("/login")}
-              className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-light-accent to-purple-500 dark:from-dark-accent dark:to-purple-400 hover:from-light-accent/90 hover:to-purple-500/90 dark:hover:from-dark-accent/90 dark:hover:to-purple-400/90 text-light-accent-text dark:text-dark-accent-text font-semibold rounded-2xl transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-1 active:translate-y-0 focus:outline-none focus:ring-4 focus:ring-light-accent/30 dark:focus:ring-dark-accent/30"
+              onClick={handleSignInClick}
+              className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-light-accent to-purple-500 dark:from-dark-accent dark:to-purple-400 hover:from-light-accent/90 hover:to-purple-500/90 dark:hover:from-dark-accent/90 dark:hover:to-purple-400/90 text-light-accent-text dark:text-dark-accent-text font-semibold rounded-2xl transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-1 active:translate-y-0 focus:outline-none focus:ring-4 focus:ring-light-accent/30 dark:focus:ring-dark-accent/30 cursor-pointer"
               aria-label="Sign In with Google"
             >
               <span className="flex items-center justify-center gap-2">
