@@ -104,7 +104,7 @@ const DashboardHeader = () => {
 
           <motion.div variants={itemVariants} className="space-y-5">
             {/* Date and Time */}
-            <div className="flex flex-col sm:flex-row sm:items-center gap-2 text-light-muted dark:text-dark-muted text-sm">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-2 text-light-muted dark:text-dark-muted text-xs sm:text-sm">
               <div className="flex items-center gap-2">
                 <Calendar className="w-4 h-4" />
                 <span>{formatDate(currentTime)}</span>
@@ -119,7 +119,7 @@ const DashboardHeader = () => {
             {/* Main Welcome */}
             <div>
               <motion.h1
-                className="text-3xl sm:text-4xl lg:text-5xl font-bold text-light-text dark:text-dark-text mb-2"
+                className="text-2xl sm:text-4xl lg:text-5xl font-bold text-light-text dark:text-dark-text mb-2"
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
@@ -136,7 +136,7 @@ const DashboardHeader = () => {
               </motion.h1>
 
               <motion.p
-                className="text-light-secondary-text dark:text-dark-secondary-text text-base sm:text-lg flex items-center gap-2"
+                className="text-light-secondary-text dark:text-dark-secondary-text text-xs sm:text-lg flex items-center gap-2"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.6 }}
