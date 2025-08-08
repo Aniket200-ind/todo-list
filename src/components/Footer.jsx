@@ -7,7 +7,7 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative bg-light-background dark:bg-dark-secondary-background">
+    <footer className="relative bg-light-background dark:bg-dark-secondary-background sm:p-3">
       {/* Top accent border */}
       <div className="h-px bg-gradient-to-r from-transparent via-light-accent/30 to-transparent dark:via-dark-accent/30" />
 
@@ -23,17 +23,17 @@ const Footer = () => {
           >
             {/* App Name */}
             <h3 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-light-accent to-purple-500 dark:from-dark-accent dark:to-purple-400 bg-clip-text text-transparent">
-              TodoApp
+              DoneIt
             </h3>
 
             {/* Tagline */}
             <p className="text-sm text-light-secondary-text dark:text-dark-secondary-text">
-              Built with ❤️ for minimal productivity.
+              Built with ❤️ by Aniket.
             </p>
 
             {/* Copyright */}
             <p className="text-xs text-light-muted dark:text-dark-muted">
-              © {currentYear} TodoApp. All Rights Reserved.
+              © {currentYear} DoneIt.
             </p>
           </motion.div>
 
