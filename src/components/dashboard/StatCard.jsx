@@ -1,6 +1,6 @@
 //! File: src/components/dashboard/StatCard.jsx
 
-import CountUp from "@/components/Countup";
+import CountUp from "@/components/CountUp";
 import { motion } from "framer-motion";
 import { TrendingUp } from "lucide-react";
 
