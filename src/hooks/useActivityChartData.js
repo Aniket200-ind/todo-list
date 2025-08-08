@@ -13,17 +13,16 @@ export default function useActivityChartData(weekOffset = 0) {
   useEffect(() => {
     if (!user || loading) return;
 
-    // Offset allows viewing previous weeks (0 = current, -1 = last week, etc.)
     const baseDate = new Date();
     baseDate.setDate(baseDate.getDate() + weekOffset * 7);
 
-    const start = startOfWeek(baseDate, { weekStartsOn: 1 }); // Monday
-    const end = endOfWeek(baseDate, { weekStartsOn: 1 }); // Sunday
+    const start = startOfWeek(baseDate, { weekStartsOn: 1 });
+    const end = endOfWeek(baseDate, { weekStartsOn: 1 });
 
     const days = eachDayOfInterval({ start, end });
     const formattedDays = days.map((date) => ({
       date: format(date, "yyyy-MM-dd"),
-      label: format(date, "EEE"), // "Mon", "Tue", ...
+      label: format(date, "EEE"), // "Mon", "Tue" format
     }));
 
     const unsubscribe = onSnapshot(
