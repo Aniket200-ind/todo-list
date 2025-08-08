@@ -1,6 +1,14 @@
+//! File: src/hooks/useTodos.js
+
 import { db } from "@/lib/firebase";
 import {
-  collection, addDoc, serverTimestamp, doc, updateDoc, deleteDoc, onSnapshot,
+  collection,
+  addDoc,
+  serverTimestamp,
+  doc,
+  updateDoc,
+  deleteDoc,
+  onSnapshot,
 } from "firebase/firestore";
 
 import { format } from "date-fns";
@@ -17,127 +25,140 @@ export default function useTodos(user) {
 
   useEffect(() => {
     if (user === null) {
-      // For guest users, use localStorage
       const stored = localStorage.getItem("todos");
       setTodos(stored ? JSON.parse(stored) : []);
-      
+
       // Set up a storage event listener to sync across tabs
       const handleStorageChange = (e) => {
         if (e.key === "todos") {
           setTodos(JSON.parse(e.newValue || "[]"));
         }
       };
-      
+
       window.addEventListener("storage", handleStorageChange);
       return () => window.removeEventListener("storage", handleStorageChange);
     } else {
-      // For logged-in users, set up a real-time listener
+      // For logged-in users
       const todosRef = collection(db, "users", user.uid, "todos");
-      const unsubscribe = onSnapshot(todosRef, (snapshot) => {
-        const todosFromFirestore = snapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-        setTodos(todosFromFirestore);
-      }, (error) => {
-        console.error("Error listening to todos from Firestore:", error);
-      });
-      
-      // Clean up listener on unmount
+      const unsubscribe = onSnapshot(
+        todosRef,
+        (snapshot) => {
+          const todosFromFirestore = snapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          }));
+          setTodos(todosFromFirestore);
+        },
+        (error) => {
+          console.error("Error listening to todos from Firestore:", error);
+        }
+      );
       return () => unsubscribe();
     }
   }, [user]);
 
- const addTodo = useCallback(async (title, description = "") => {
-    if (!title.trim()) return;
-    const newTodo = {
-      title,
-      description,
-      completed: false,
-      createdDate: format(new Date(), "yyyy-MM-dd"),
-    };
-
-    if (user) {
-      try {
-        // Don't need to update state manually, onSnapshot will handle it
-        await addDoc(
-          collection(db, "users", user.uid, "todos"),
-          { ...newTodo, createdAt: serverTimestamp() }
-        );
-      } catch (error) {
-        console.error("Error adding todo to Firestore:", error);
-        throw error;
-      }
-    } else {
-      // For guest users
-      const guestTodo = {
-        ...newTodo,
-        id: crypto.randomUUID()
+  const addTodo = useCallback(
+    async (title, description = "") => {
+      if (!title.trim()) return;
+      const newTodo = {
+        title,
+        description,
+        completed: false,
+        createdDate: format(new Date(), "yyyy-MM-dd"),
       };
-      updateGuestTodos([...todos, guestTodo]);
-    }
-  }, [user, todos]);
 
-const toggleCompleteTodo = useCallback(async (id) => {
-    const todoToToggle = todos.find((t) => t.id === id);
-    if (!todoToToggle) {
-      console.error("Todo not found for toggling:", id);
-      return;
-    }
-
-    const newCompletedStatus = !todoToToggle.completed;
-    const updatedFields = {
-      completed: newCompletedStatus,
-      completedAt: newCompletedStatus ? format(new Date(), "yyyy-MM-dd") : null,
-    };
-
-    if (user) {
-      const todoRef = doc(db, "users", user.uid, "todos", id);
-      try {
-        await updateDoc(todoRef, updatedFields);
-      } catch (error) {
-        console.error("Error toggling todo in Firestore:", error);
-        throw error;
+      if (user) {
+        try {
+          await addDoc(collection(db, "users", user.uid, "todos"), {
+            ...newTodo,
+            createdAt: serverTimestamp(),
+          });
+        } catch (error) {
+          console.error("Error adding todo to Firestore:", error);
+          throw error;
+        }
+      } else {
+        const guestTodo = {
+          ...newTodo,
+          id: crypto.randomUUID(),
+        };
+        updateGuestTodos([...todos, guestTodo]);
       }
-    } else {
-      const updatedTodos = todos.map((todo) =>
-        todo.id === id ? { ...todo, ...updatedFields } : todo
-      );
-      updateGuestTodos(updatedTodos);
-    }
-  }, [user, todos]);
+    },
+    [user, todos]
+  );
 
-const editTodo = useCallback(async (id, updatedFields) => {
-    if (user) {
-      const todoRef = doc(db, "users", user.uid, "todos", id);
-      try {
-        await updateDoc(todoRef, updatedFields);
-      } catch (error) {
-        console.error("Error updating todo in Firestore:", error);
-        throw error;
+  const toggleCompleteTodo = useCallback(
+    async (id) => {
+      const todoToToggle = todos.find((t) => t.id === id);
+      if (!todoToToggle) {
+        console.error("Todo not found for toggling:", id);
+        return;
       }
-    } else {
-      const updatedTodos = todos.map((todo) =>
-        todo.id === id ? { ...todo, ...updatedFields } : todo
-      );
-      updateGuestTodos(updatedTodos);
-    }
-  }, [user, todos]);
 
-const deleteTodo = useCallback(async (id) => {
-    if (user) {
-      const todoRef = doc(db, "users", user.uid, "todos", id);
-      try {
-        await deleteDoc(todoRef);
-      } catch (error) {
-        console.error("Error deleting todo from Firestore:", error);
-        throw error;
+      const newCompletedStatus = !todoToToggle.completed;
+      const updatedFields = {
+        completed: newCompletedStatus,
+        completedAt: newCompletedStatus
+          ? format(new Date(), "yyyy-MM-dd")
+          : null,
+      };
+
+      if (user) {
+        const todoRef = doc(db, "users", user.uid, "todos", id);
+        try {
+          await updateDoc(todoRef, updatedFields);
+        } catch (error) {
+          console.error("Error toggling todo in Firestore:", error);
+          throw error;
+        }
+      } else {
+        const updatedTodos = todos.map((todo) =>
+          todo.id === id ? { ...todo, ...updatedFields } : todo
+        );
+        updateGuestTodos(updatedTodos);
       }
-    } else {
-      const updatedTodos = todos.filter((todo) => todo.id !== id);
-      updateGuestTodos(updatedTodos);
-    }
-  }, [user, todos]);
+    },
+    [user, todos]
+  );
+
+  const editTodo = useCallback(
+    async (id, updatedFields) => {
+      if (user) {
+        const todoRef = doc(db, "users", user.uid, "todos", id);
+        try {
+          await updateDoc(todoRef, updatedFields);
+        } catch (error) {
+          console.error("Error updating todo in Firestore:", error);
+          throw error;
+        }
+      } else {
+        const updatedTodos = todos.map((todo) =>
+          todo.id === id ? { ...todo, ...updatedFields } : todo
+        );
+        updateGuestTodos(updatedTodos);
+      }
+    },
+    [user, todos]
+  );
+
+  const deleteTodo = useCallback(
+    async (id) => {
+      if (user) {
+        const todoRef = doc(db, "users", user.uid, "todos", id);
+        try {
+          await deleteDoc(todoRef);
+        } catch (error) {
+          console.error("Error deleting todo from Firestore:", error);
+          throw error;
+        }
+      } else {
+        const updatedTodos = todos.filter((todo) => todo.id !== id);
+        updateGuestTodos(updatedTodos);
+      }
+    },
+    [user, todos]
+  );
 
   return { todos, addTodo, toggleCompleteTodo, deleteTodo, editTodo };
 }
