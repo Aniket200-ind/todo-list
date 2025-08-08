@@ -153,7 +153,7 @@ const containerVariants = {
           </motion.div>
 
           {/* Action Button */}
-          <motion.div variants={itemVariants} className="flex justify-center lg:justify-end">
+          <motion.div variants={itemVariants} className="flex justify-center lg:justify-end lg:mt-10">
             <Link
               to="/todo"
               className="group relative overflow-hidden inline-flex items-center justify-center gap-3 px-6 py-4 rounded-xl bg-light-accent dark:bg-dark-accent text-light-accent-text dark:text-dark-accent-text shadow-lg hover:shadow-xl transition-all duration-300 font-semibold text-base transform hover:scale-105 active:scale-95"
