@@ -30,14 +30,14 @@ export function Login() {
             <div className="flex justify-center mb-6">
               {/* Google Logo */}
               <div className="bg-light-accent/20 dark:bg-dark-accent/20 p-4 rounded-2xl">
-                <img 
-                  src="/google-logo.svg" 
-                  alt="Google Logo" 
+                <img
+                  src="/google-logo.svg"
+                  alt="Google Logo"
                   className="w-8 h-8 md:w-10 md:h-10"
                 />
               </div>
             </div>
-            
+
             <h1 className="text-2xl md:text-3xl font-bold text-light-text dark:text-dark-text mb-2">
               Welcome Back
             </h1>
