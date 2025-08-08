@@ -5,7 +5,6 @@ import { ListTodo, CheckCircle2, Clock, BarChart3 } from "lucide-react";
 import StatCard from "@/components/dashboard/StatCard";
 import useTaskStats from "@/hooks/useTaskStats";
 
-
 const Stats = () => {
   const stats = useTaskStats();
 
@@ -48,7 +47,7 @@ const Stats = () => {
       animate="visible"
       className="relative"
     >
-      {/* Section header */}
+
       <motion.div variants={cardVariants} className="mb-8">
         <div className="flex items-center gap-3 mb-2">
           <motion.div
@@ -66,7 +65,6 @@ const Stats = () => {
         </p>
       </motion.div>
 
-      {/* Stats grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
         <StatCard
           title="Total Tasks"
