@@ -1,6 +1,6 @@
 # ✅ Done It
 
-A minimal yet powerful task management web app that lets you **create, manage, and track your tasks** — whether you’re a guest or a logged-in user. Built with a modern tech stack including **React, Redux Toolkit, TailwindCSS, and Firebase**, with smooth animations powered by **Framer Motion**.
+A minimal yet powerful task management web app that lets you **create, manage, and track your tasks** — whether you’re a guest or a logged-in user. Built with a modern tech stack including **React, TailwindCSS, and Firebase**, with smooth animations powered by **Framer Motion**.
 
 [Live Site URL📎](https://doneit.vercel.app/)
 
